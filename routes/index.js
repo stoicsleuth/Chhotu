@@ -3,74 +3,48 @@ const router = express.Router();
 const path = require('path');
 const base58 = require('./../controllers/base58');
 const userController = require ('../controllers/userController');
+const AuthController = require ('../controllers/AuthController');
+const urlController = require ('../controllers/urlCOntroller');
 // grab the url model
 const url = require('./../models/url');
+//error handlers
+const {catchErrors} = require('../handlers/errorHandlers');
+
 
 
 //Declaring our routes
 
-router.get('/', (req, res) => {
+router.get('/', catchErrors(async (req, res) => {
     // route to serve up the homepage (index.html)
-    res.render('index');
-});
+    let urls= [];
+    if(req.user)
+    {
+        urls=await url.find({user: req.user}).sort();
 
-router.post('/api/shorten', async (req, res) => {
-    // route to create and return a shortened URL given a long URL
+        urls.forEach(url => {
+            url.shortUrl = req.headers.host + '/' + base58.encode(url.id);
+            // let timeDiff = Math.abs(url.created_at.getTime());
+            // var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            url.timeDiff = Math.ceil((Date.now()- url.created_at.getTime())/(1000 * 3600 * 24)) + ' days ago';
+        });
+        
+    }
     
-    const longUrl = req.body.url;
-    
-    let shortUrl = '';
-    // check if url already exists in database
-    const doc = await url.findOne({
-        long_url: longUrl
-    });
-    if (doc) {
-            
-            // base58 encode the unique _id of that document and construct the short URL
-            shortUrl = req.headers.host + '/' + base58.encode(doc.id);
+    res.render('index', {urls});
+}));
 
-            // since the document exists, we return it without creating a new entry
-            res.send({
-                'shortUrl': shortUrl
-            });
-            return;
-        } else {
-            
-            // The long URL was not found in the long_url field in our urls
-            // collection, so we need to create a new entry:
-
-            const newUrl = url({
-                long_url: longUrl
-            });
-
-            // save the new link
-            newUrl.save(function(err) {
-                if (err) {
-                    
-                }
-
-                // construct the short URL
-
-                shortUrl = req.headers.host + '/' + base58.encode(newUrl.id);
-
-
-                res.send({
-                    'shortUrl': shortUrl
-                });
-            });
-            return;
-        }
-
-    });
+router.post('/api/shorten', urlController.shorten);
 //login page
 router.get('/login', (req,res)=>{
     res.render('login');
 })
-
-
+router.get('/logout', AuthController.logout);
 //Post of register & Login
 
-router.post('/register', userController.validateRegister);
+router.post('/register', catchErrors(userController.validateRegister), catchErrors(userController.register), AuthController.login);
+
+router.post('/login', userController.checkFlash, AuthController.login);
+
 
 router.get('/:encoded_id', function(req, res) {
     
@@ -80,9 +54,9 @@ router.get('/:encoded_id', function(req, res) {
     var id = base58.decode(base58Id);
     
     // check if url already exists in database
-    url.findOne({
-        id: id
-    }, function(err, doc) {
+    url.findOneAndUpdate(
+        {id: id},
+        {$inc : {click : 1}}, function(err, doc) {
         if (doc) {
             // found an entry in the DB, redirect the user to their destination
             

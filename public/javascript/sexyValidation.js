@@ -35,3 +35,17 @@ document.querySelector('.sexyRedButton').addEventListener('click', (e)=>{
     },2000);
     
 })
+
+document.querySelector('.sexyBlueButton').addEventListener('click', (e)=>{
+    e.preventDefault();
+    setTimeout(()=>{
+        document.querySelector('.sexyBlueButton').classList.add('onclick');
+    },200);
+    setTimeout(()=>{
+        document.querySelector('.sexyBlueButton').classList.remove('onclick');
+        document.querySelector('.sexyBlueButton').textContent= "Logging in..";
+        document.getElementById('users-form').action ="/login";
+        document.getElementById('users-form').submit();
+    },2000);
+    
+})

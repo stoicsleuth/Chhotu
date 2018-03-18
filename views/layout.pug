@@ -26,8 +26,15 @@ html
         |         
         li About
       |     
-      ul.navbar-right
-        li.fancyButton Login/Signup
+      if !user
+        ul.navbar-right
+          li.fancyButton
+            a(href="/login") Login/Signup
+      if user
+        ul.navbar-right
+          li
+            a(href="/logout") Logout  
+          li.fancyButton Account
     .content
       block content
     

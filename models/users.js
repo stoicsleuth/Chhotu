@@ -18,7 +18,6 @@ const userSchema = new Schema({
     },
     name: {
         type: String,
-        required: 'Please supply a name',
         trim: true
     },
     slug: String,
@@ -41,19 +40,19 @@ userSchema.virtual('gravatar').get( function(){
 userSchema.plugin(passportLocalMongoose, {usernameField: 'email'});
 userSchema.plugin(mongooseErrorHandler);
 
-userSchema.pre('save', async function(next){
-	if(!this.isModified('name'))
-	{
-		next();
-		return;
-	}
-	this.slug= slug(this.name);
-	const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
-  	const storesWithSlug = await this.constructor.find({ slug: slugRegEx });
-  	if(storesWithSlug.length) {
-    	this.slug = `${this.slug}-${storesWithSlug.length + 1}`;
-  	}	
-	next();
-});
+// userSchema.pre('save', async function(next){
+// 	if(!this.isModified('name'))
+// 	{
+// 		next();
+// 		return;
+// 	}
+// 	this.slug= slug(this.name);
+// 	const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
+//   	const storesWithSlug = await this.constructor.find({ slug: slugRegEx });
+//   	if(storesWithSlug.length) {
+//     	this.slug = `${this.slug}-${storesWithSlug.length + 1}`;
+//   	}	
+// 	next();
+// });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('users', userSchema);

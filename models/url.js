@@ -12,7 +12,13 @@ var counter = mongoose.model('counter', CounterSchema);
 var urlSchema = new Schema({
   id: {type: Number, index: true},
   long_url: String,
-  created_at: Date
+  created_at: Date,
+  user: {
+
+        type: mongoose.Schema.ObjectId,
+        ref :'users'
+  },
+  click: 0
 });
 
 urlSchema.pre('save', function(next){

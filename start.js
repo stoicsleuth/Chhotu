@@ -11,6 +11,10 @@ mongoose.connection.on('error', (err)=>{
 })
 
 
+//Adding the models
+require('./models/users');
+
+
 //Starting the app
 const app = require('./app');
 app.set('port', process.env.PORT || 8080 );

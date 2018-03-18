@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  if user
+    .user-hello
+      p=`Hello ${user.email}`
   .url__shorten
     p
       | Chhotu: Make your links 
@@ -15,4 +18,32 @@ block content
       #link
       |             
       #clipboard.fancy
+  if user
+    .url-table
+      .header
+        span="Your"
+        span="Chotu"
+        span="Links"
+      table.table
+        tr
+          th Original Url
+          th Shortened Url
+          th Created at
+          th Clicks
+        if (urls.length>0)
+          for url in urls
+            tr
+              td
+                a(href=`${url.long_url}`)=url.long_url
+              td
+                a(href=`${url.shortUrl}`)=url.shortUrl
+              td=url.timeDiff
+              if(url.click==undefined)
+                td='0 clicks'
+              else 
+                td=`${url.click} clicks`
+        else
+          tr
+            td="No links yet! Get going."
+          
   

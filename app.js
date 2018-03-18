@@ -9,6 +9,12 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const sessionStore = require('connect-mongo')(session);
+const promisify = require('es6-promisify');
+const errorHandlers = require('./handlers/errorHandlers');
+const passport = require('passport');
+
+//require passport handler
+require('./handlers/passport');
 
 //Create the express app
 const app = express();
@@ -48,7 +54,17 @@ app.use(bodyParser.json());
 // handles URL encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// // Passport JS is what we use to handle our logins
+app.use(passport.initialize());
+app.use(passport.session());
 
+// pass variables to our templates + all requests
+app.use((req, res, next) => {
+    res.locals.flashes = req.flash();
+    res.locals.user = req.user || null;
+    res.locals.currentPath = req.path;
+    next();
+});
 
 //Using our routes
 app.use('/', router);

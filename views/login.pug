@@ -2,12 +2,12 @@ extends layout
 
 block content
 	form(action="" method="POST" name="users-form" id="users-form").url__shorten.login-form
-		label(for="name") Email ID
-		input.formEmail(type="text" placeholder="email@about.com" name="name")
+		label(for="email") Email ID
+		input.formEmail(type="text" placeholder="email@about.com" name="email")
 		label(for="name") Password
 		input.formPassword(type="password" name="password")
 		.buttons-set
-			button(type="submit" formaction="") Login
+			button.sexyBlueButton(type="submit" formaction="") Login
 			button.sexyRedButton(type="submit") Register
 
 	script(src="javascript/sexyValidation.js")
