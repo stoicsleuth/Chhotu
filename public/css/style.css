@@ -1,0 +1,279 @@
+body{
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+    background: #f3f3f3;
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.navbar{
+    -webkit-box-align: center;
+    /* text-align: center; */
+    width: 1232px;
+    margin: 0 auto;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+}
+
+.navbar ul{
+    padding: 0px;
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar ul li:not(:last-child){
+    margin-right: 40px;
+}
+
+.navbar ul li img{
+    width: 40px;
+}
+
+.fancyButton{
+    cursor: pointer;
+    padding: 10px 30px;
+    border-radius: 25px;
+    color: white;
+    box-shadow: rgba(127, 88, 232, 0.5) 0px 5px 6px;
+    background: #4776E6;
+    background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);
+    background: linear-gradient(to right, #8E54E9, #4776E6);
+}
+
+.url__shorten{
+    display: flex;
+    flex-direction: column;
+    max-width: 550px;
+    margin: 0px auto;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.url__shorten p{
+    font-size: 2em;
+    font-weight: 200;
+    color: #5d5959;
+}
+
+.url__shorten input{
+    min-width: 300px;
+    width: 546px;
+    padding: 17px 29px;
+    border: 0px;
+    position: relative;
+    border-radius: 40px;
+    font-size: 13px;
+    outline: none;
+    border-bottom: 5px solid #e8e8e8;
+    box-shadow: rgb(183, 178, 178) 1px 13px 31px;
+}
+@media (max-width: 440px){
+    .url__shorten input{
+        width: 300px;
+    }
+    .url__shorten p{
+        font-size: 1.4em;
+    }
+    .navbar ul li:not(:last-child) {
+        margin-right: 16px;
+    }
+    .navbar{
+        width: 330px;
+        padding: 0px 0px;
+    }
+    .fancyButton{
+        padding: 11px 16px;
+        border-radius: 28px;
+    }
+}
+.url__shorten button{
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    border: 0;
+    padding: 12px 24px;
+    border-radius: 40px;
+    color: white;
+    box-shadow: rgba(127, 88, 232, 0.5) 0px 5px 6px;
+    background: #4776E6;
+    background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);
+    background: linear-gradient(to right, #8E54E9, #4776E6);
+    outline: none;
+    cursor: pointer;
+}
+
+.link__display{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 36px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.button{
+    position: relative;
+}
+.sexyRed{
+    color: crimson;
+    animation: color-change 18s cubic-bezier(1,0,0,1) infinite;
+}
+@-webkit-keyframes color-change {
+    0% { color: rgb(185, 15, 201); }
+    33% { color: rgb(6, 81, 100); }  
+    67% { color: rgb(10, 99, 172); }
+    100% { color: rgb(241, 189, 19); }
+}
+@keyframes color-change {
+    0% { color: rgb(185, 15, 201); }
+    33% { color: rgb(6, 81, 100); }  
+    67% { color: rgb(10, 99, 172); }
+    100% { color: rgb(241, 189, 19); }
+}
+
+
+/* login */
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 100px 0px;
+}
+
+.login-form label{
+    margin-left: 20px;
+}
+.login-form input{
+    width: 490px;
+}
+.login-form button{
+    position: initial;
+    /* margin-left: 30%; */
+    margin-top: 35px;
+    padding: 17px 35px;
+}
+.buttons-set{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.login-form .sexyRedButton{
+    transition: all 0.25s ease;
+    background: #bc4e9c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f80759, #bc4e9c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: rgba(228, 60, 98, 0.5) 0px 5px 6px;
+}
+
+/* login-button-animation */
+
+.onclick{
+    width: 44px;
+    background: transparent !important;
+    padding: 22px !important;
+    /* padding: 0px; */
+    border: 0px solid !important;
+    border-color: #536de7 !important;
+    border-radius: 40px !important;
+    /* border-width: 10px; */
+    font-size: 0px;
+    animation: rotating 2s 0.25s linear infinite;
+
+}
+
+@keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+
+/* flash messages */
+.flash-messages{
+    position: fixed;
+    top: 81px;
+    left: 80px;
+}
+
+.flash{
+    margin-bottom: 10px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+
+.flash--error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 0px 44px;
+    border-radius: 40px;
+    background: #cb2d3e;
+    background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);
+    background: linear-gradient(to right, #ef473a, #cb2d3e);
+}
+
+.flash p{
+    margin-right: 10px;
+}
+
+.flash button{
+    outline: none;
+    padding: 0px 0px;
+    background: transparent;
+    border: 0px;
+    color: white;
+    font-size: 1.2em;
+}
+
+
+/* Media queries for flash validation messages and login form */
+@media (max-width: 440px){
+    .flash-messages{
+        display: flex;
+        height: 59px;
+        overflow-x: scroll;
+        left: 10px;
+    }
+    .flash{
+        margin-right: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 0px 45px;
+        border-radius: 40px;
+        background: #cb2d3e;
+        background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);
+        background: linear-gradient(to right, #ef473a, #cb2d3e);
+        width: 158px;
+    }
+    .login-form input{
+        width: 300px;
+        align-items: center;
+    }
+    .login-form{
+        height: 400px;
+    }
+    .login-form label{
+        width: 100%;
+        margin-left: 30px;
+       
+    }
+}

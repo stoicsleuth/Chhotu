@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .url__shorten
+    p
+      | Chhotu: Make your links 
+      span.sexyRed sexy.
+    |     
+    .button
+      input#url-field(type='text', placeholder='Enter your boring link..')
+      |         
+      button.button-shorten Submit
+        |         
+    .link__display
+      #link
+      |             
+      #clipboard.fancy
+  
