@@ -20,11 +20,13 @@ html
     .navbar
       ul.navbar-left
         li
-          img(src='./../images/logo.png', alt='')
+          a(href="/")
+            img(src='./../images/logo.png', alt='')
         |         
-        li Github
-        |         
-        li About
+        li
+          a(href="https://github.com/stoicsleuth/Chhotu")='Github'  
+        li 
+          a(href="/dark") Dark
       |     
       if !user
         ul.navbar-right
@@ -34,7 +36,8 @@ html
         ul.navbar-right
           li
             a(href="/logout") Logout  
-          li.fancyButton Account
+          li.fancyButton
+            a(href="/account") Account
     .content
       block content
     
@@ -48,6 +51,11 @@ html
                 .flash(class=`flash--${category}`)
                   p.flash__text!= message
                   button.flash__remove(onClick="this.parentElement.style.opacity = 0") &times;
+    .footer
+      p="Made with Electricity |"
+      p
+        a(href="/3Zv")="Thank Nicola Tesla |"
+      p='Buy me a pulse.'
         
     |   
     script(src='https://code.jquery.com/jquery-2.1.4.min.js')
@@ -55,3 +63,10 @@ html
     script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js')
     |   
     script(src='./../javascript/shorten.js')
+    if (!user)
+      script.
+        document.querySelector('.footer').style.position='fixed';
+    if user
+      script.
+        document.querySelector('.url_shorten').style['margin-bottom']=0px;
+

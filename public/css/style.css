@@ -1,4 +1,7 @@
 body{
+    position: absolute;
+    width:100%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
     /* overflow: hidden; */
@@ -85,12 +88,21 @@ a{
     font-size: 1.3em;
     justify-content: center;
 }
+@media(min-width:900px){
+    .url__shorten{
+        margin-bottom: 100px;
+    }
+}
 @media (max-width: 440px){
     .url__shorten input{
         width: 300px;
     }
     .url__shorten p{
         font-size: 1.4em;
+    }
+    .link__display{
+        flex-direction: column;
+        height: 100px;
     }
     .navbar ul li:not(:last-child) {
         margin-right: 16px;
@@ -136,6 +148,9 @@ a{
     color: crimson;
     animation: color-change 18s cubic-bezier(1,0,0,1) infinite;
 }
+.sexyRedDark{
+    animation: color-change-part2 18s cubic-bezier(1,0,0,1) infinite;
+}
 @-webkit-keyframes color-change {
     0% { color: rgb(185, 15, 201); }
     33% { color: rgb(6, 81, 100); }  
@@ -147,6 +162,13 @@ a{
     33% { color: rgb(6, 81, 100); }  
     67% { color: rgb(10, 99, 172); }
     100% { color: rgb(241, 189, 19); }
+}
+
+@keyframes color-change-part2 {
+    0% { color: rgb(225, 116, 235); }
+    33% { color: rgb(78, 210, 243); }  
+    67% { color: rgb(210, 65, 230); }
+    100% { color: rgb(245, 210, 96); }
 }
 
 
@@ -171,7 +193,8 @@ table.table {
 .url-table{
     max-width: 1100px;
     margin: auto;
-    height: 500px;
+    margin-bottom: 200px;
+    height: auto;
 }
 
 .table th, .table td { 
@@ -183,10 +206,14 @@ padding: 19px 35px;
 border-bottom: 1px solid #dcdbdb;
 }
 
+
 @media screen and (max-width: 800px) {
 .table{
     width: 90%;
     margin:auto;
+}
+.table a{
+    font-size: 0.8em;
 }
 tr { 
     display: flex; 
@@ -219,7 +246,18 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
     font-weight: 500;
 }
 
-
+.pagination{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top:10px;
+}
+.pagination a{
+    padding: 10px 20px;
+    background: linear-gradient(to right, #8E54E9, #4776E6);
+    color: white;
+    border-radius: 40px;
+}
 /* login */
 
 .login-form{
@@ -227,7 +265,7 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
     flex-direction: column;
     height: 300px;
     justify-content: space-evenly;
-    align-items: flex-start;
+    align-items: center;
     padding: 100px 0px;
 }
 
@@ -346,6 +384,7 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
         overflow-x: scroll;
         left: 10px;
     }
+    
     .flash{
         margin-right: 5px;
         display: flex;
@@ -359,6 +398,10 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
         background: linear-gradient(to right, #ef473a, #cb2d3e);
         width: 158px;
     }
+    .flash--success{
+        background: -webkit-linear-gradient(to right, #3aef67d0, #04c023);
+        background: linear-gradient(to right, #3aef67d0, #04c023);
+    }
     .login-form input{
         width: 300px;
         align-items: center;
@@ -367,8 +410,39 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
         height: 400px;
     }
     .login-form label{
-        width: 100%;
-        margin-left: 30px;
+        
        
+    }
+}
+
+/*footer*/
+.footer{
+    position: absolute !important; 
+    width: 100%;
+    bottom:0;
+    display: flex;
+    background: white;
+    justify-content: center;
+    color: #929396;
+}
+
+.footer p:not(:last-child){
+    margin-right: 10px;
+}
+
+@media(max-width:440px){
+    .footer{
+        box-sizing: border-box;
+        padding: 0PX 20PX;
+        display: flex;
+        background: white;
+        justify-content: center;
+        color: #929396;
+        bottom: 0px;
+        position: relative;
+        font-size: 13px;
+    }
+    .footer p:not(:last-child){
+        margin-right: 0px;
     }
 }

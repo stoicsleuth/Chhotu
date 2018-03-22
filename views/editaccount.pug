@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	form(action="/account" method="POST" name="users-form" id="users-form").url__shorten.login-form
+		label(for="name") Change Name
+		input.formName(type="text" placeholder=`${user.name || user.email}` name="name")
+		.buttons-set
+			button.sexyBlueButton(type="submit" formaction="") Change
+

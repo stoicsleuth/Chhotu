@@ -4,9 +4,10 @@ const path = require('path');
 const base58 = require('./../controllers/base58');
 const userController = require ('../controllers/userController');
 const AuthController = require ('../controllers/AuthController');
-const urlController = require ('../controllers/urlCOntroller');
+const urlController = require ('../controllers/urlController');
 // grab the url model
 const url = require('./../models/url');
+const Darkurl = require('./../models/darkurl');
 //error handlers
 const {catchErrors} = require('../handlers/errorHandlers');
 
@@ -14,26 +15,15 @@ const {catchErrors} = require('../handlers/errorHandlers');
 
 //Declaring our routes
 
-router.get('/', catchErrors(async (req, res) => {
-    // route to serve up the homepage (index.html)
-    let urls= [];
-    if(req.user)
-    {
-        urls=await url.find({user: req.user}).sort();
+router.get('/', catchErrors(urlController.landing));
 
-        urls.forEach(url => {
-            url.shortUrl = req.headers.host + '/' + base58.encode(url.id);
-            // let timeDiff = Math.abs(url.created_at.getTime());
-            // var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            url.timeDiff = Math.ceil((Date.now()- url.created_at.getTime())/(1000 * 3600 * 24)) + ' days ago';
-        });
-        
-    }
-    
-    res.render('index', {urls});
-}));
+router.get('/pages/:page', catchErrors(urlController.landing));
 
-router.post('/api/shorten', urlController.shorten);
+router.get('/dark', catchErrors(urlController.darkLanding));
+
+router.post('/api/shorten', catchErrors(urlController.shorten));
+
+router.post('/api/shortenDark', catchErrors(urlController.shortenDark));
 //login page
 router.get('/login', (req,res)=>{
     res.render('login');
@@ -43,12 +33,33 @@ router.get('/logout', AuthController.logout);
 
 router.post('/register', catchErrors(userController.validateRegister), catchErrors(userController.register), AuthController.login);
 
-router.post('/login', userController.checkFlash, AuthController.login);
+router.post('/login', AuthController.login);
 
+router.get('/account', userController.editAccount);
 
-router.get('/:encoded_id', function(req, res) {
+router.post('/account', catchErrors(userController.updateAccount));
+
+router.get('/:encoded_id', async function(req, res) {
     
     // route to redirect the visitor to their original URL given the short URL
+    if(req.params.encoded_id.indexOf('-')>1){
+        console.log('entered');
+        const url = await Darkurl.findOne({short_url:req.params.encoded_id});
+        console.log(url);
+        if(url){
+            
+            const longUrl = "http://" + url.long_url;
+            res.redirect(longUrl);
+            return;
+
+        }
+        else
+        {
+            // req.flash('failure', 'No such url found');
+            res.redirect('/');
+            return;
+        }
+    }
     var base58Id = req.params.encoded_id;
     
     var id = base58.decode(base58Id);
@@ -72,6 +83,7 @@ router.get('/:encoded_id', function(req, res) {
         }
     });
 });
+
 
 
 

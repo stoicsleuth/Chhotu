@@ -41,6 +41,21 @@ exports.register = async(req,res,next) =>{
 };
 
 
-exports.checkFlash = (req,res,next)=>{
-    console.log(req.body.flashes);next();
+
+exports.editAccount = (req,res)=>{
+    res.render('editaccount', {title: 'Edit Account | Chhotu'});
+}
+
+exports.updateAccount = async (req,res)=>{
+    const updates = {
+        name: req.body.name
+    };
+    // console.log(req.name);
+    const user = await users.findOneAndUpdate(
+        {_id: req.user._id},
+        {$set: updates},
+        {new: true, runValidators:true, context:'query'}
+    );
+    req.flash('success', 'Profile Updated!');
+    res.redirect(`/`);
 }

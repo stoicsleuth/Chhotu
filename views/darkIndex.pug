@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  if user
+    .user-hello
+      p=`Hello ${user.name || user.email}`
+  .url__shorten
+    p
+      | Make your links 
+      span.sexyRed.sexyRedDark='Dark & Suspicious.'
+    |     
+    .button
+      input#url-field(type='text', placeholder='Enter your wholesome link..')
+      |         
+      button.dark Darken
+        |         
+    .link__display
+      #link
+      |             
+      #clipboard.fancy
+  script.
+    document.querySelector('body').style.background = '#1c1323';
+    document.querySelector('body').style.color = '#fbfbfb';
+    document.querySelector('.url__shorten p').style.color ='#dcd2d2';
+    document.querySelector('.url__shorten input').style['box-shadow'] ='none';
+    
+  
+          
+  

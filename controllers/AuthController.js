@@ -5,8 +5,8 @@ const promisify= require('es6-promisify');
 
 
 exports.login = passport.authenticate('local', {
-    failureRedirect: '/register',
-    failureFlash: 'Login Failure!',
+    failureRedirect: '/',
+    failureFlash: 'Email/password incorrect!',
     successRedirect: '/',
     successFlash: 'Logged in successfully!'
 });

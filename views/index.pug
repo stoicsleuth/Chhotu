@@ -1,9 +1,10 @@
 extends layout
+include mixins/_pagination
 
 block content
   if user
     .user-hello
-      p=`Hello ${user.email}`
+      p=`Hello ${user.name || user.email}`
   .url__shorten
     p
       | Chhotu: Make your links 
@@ -34,9 +35,9 @@ block content
           for url in urls
             tr
               td
-                a(href=`${url.long_url}`)=url.long_url
+                a(href=`http://${url.long_url}`)=url.long_url
               td
-                a(href=`${url.shortUrl}`)=url.shortUrl
+                a(href=`http://${url.shortUrl}`)=url.shortUrl
               td=url.timeDiff
               if(url.click==undefined)
                 td='0 clicks'
@@ -45,5 +46,8 @@ block content
         else
           tr
             td="No links yet! Get going."
-          
+      if count>limit
+        +pagination(page,pages,count)
+    script.
+      
   

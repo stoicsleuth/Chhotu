@@ -1,0 +1,11 @@
+mixin pagination(page,pages,count)
+  .pagination
+    if page>1
+        a(href=`/pages/${page-1}`) Prev
+    else
+        a Prev
+    p=`Page ${page} of ${pages}`
+    if page<pages
+        a(href=`/pages/${page+1}`) Next
+    else
+        a Next

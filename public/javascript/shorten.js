@@ -3,21 +3,70 @@
 // import axios from 'axios';
 
 // add an event listener to the shorten button for when the user clicks it
-document.querySelector('.button-shorten').addEventListener('click', function(){
-    // AJAX call to /api/shorten with the URL that the user entered in the input box
-   axios
-        .post('/api/shorten', { url: document.getElementById('url-field').value })
-        .then((data)=>{
-            var resultHTML = '<a class="result" href="http://' + data.data.shortUrl + '">'
-              + data.data.shortUrl + '</a>';
+
+//Dark URL
+if(document.querySelector('.dark')!=null){
+    document.querySelector('.dark').addEventListener('click', function(){
+    const darkenButton = document.querySelector('.dark');
+     darkenButton.disabled = true;
+     darkenButton.innerText = 'Darkening';
+        // AJAX call to /api/shorten with the URL that the user entered in the input box
+    if((/https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}/).test(document.getElementById('url-field').value))
+    {    
+            // console.log('Working');
+            axios
+                    .post('/api/shortenDark', { url: document.getElementById('url-field').value })
+                    .then((data)=>{
+                        var resultHTML = '<a class="result" href="http://' + data.data.shortUrl + '">'
+                        + data.data.shortUrl + '</a>';
+                        document.getElementById('link').innerHTML = resultHTML;
+                        document.getElementById('clipboard').classList.add('fancyButton');
+                        document.getElementById('clipboard').innerHTML = 'Copy to Clipboard';
+                        darkenButton.disabled = false;
+                        darkenButton.innerText = "Darken"
+                    }); 
+        }
+        else{
+            darkenButton.innerText = 'Darken';
+            // console.log('Not Working');
+            var resultHTML = "Please enter a valid URL";
             document.getElementById('link').innerHTML = resultHTML;
             document.getElementById('clipboard').classList.add('fancyButton');
-            document.getElementById('clipboard').innerHTML = 'Copy to Clipboard';
-        }); 
-  
-  });
+            document.getElementById('clipboard').innerHTML = 'Try Again';
+            darkenButton.disabled = false;
+        }
+    
+    });
+}
 
-  document.getElementById('clipboard').addEventListener('click', ()=>{
+
+
+if(document.querySelector('.button-shorten')!=null){
+    document.querySelector('.button-shorten').addEventListener('click', function(){
+    // AJAX call to /api/shorten with the URL that the user entered in the input box
+   if((/https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,}/).test(document.getElementById('url-field').value))
+   {    
+        axios
+                .post('/api/shorten', { url: document.getElementById('url-field').value })
+                .then((data)=>{
+                    var resultHTML = '<a class="result" href="http://' + data.data.shortUrl + '">'
+                    + data.data.shortUrl + '</a>';
+                    document.getElementById('link').innerHTML = resultHTML;
+                    document.getElementById('clipboard').classList.add('fancyButton');
+                    document.getElementById('clipboard').innerHTML = 'Copy to Clipboard';
+                }); 
+    }
+    else{
+        var resultHTML = "Please enter a valid URL";
+        document.getElementById('link').innerHTML = resultHTML;
+        document.getElementById('clipboard').classList.add('fancyButton');
+        document.getElementById('clipboard').innerHTML = 'Try Again';
+    }
+  
+    });
+}
+
+document.getElementById('clipboard').addEventListener('click', ()=>{
       console.log("Working");
       copyToClipboard(document.querySelector('.result').innerText);
   })
@@ -43,3 +92,7 @@ document.querySelector('.button-shorten').addEventListener('click', function(){
         }
     }
 }
+
+
+
+
