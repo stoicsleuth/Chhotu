@@ -1,0 +1,25 @@
+
+<svg width="339px" height="330px" viewBox="0 0 339 330" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-6.1%" y="-4.4%" width="112.2%" height="112.6%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FF606E" offset="0%"></stop>
+            <stop stop-color="#C1001D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="rekt" filter="url(#filter-1)" transform="translate(10.000000, 5.000000)" fill-rule="nonzero" fill="url(#linearGradient-2)">
+            <path d="M0.953125,21.1289062 L11.921875,288.855469 C11.921875,288.855469 7.484375,311.1875 40.4414063,307.824219 C73.3984375,304.460938 298.421875,186.753906 298.421875,186.753906 C298.421875,186.753906 341.796875,170.605469 300.445313,151.925781 C259.09375,133.246094 42.4393116,9.07228022 28.921875,3.0625 C22.8641633,0.369273705 11.5793946,-1.45400428 6.53125,3.0625 C1.4831054,7.57900428 0.953125,21.1289062 0.953125,21.1289062 Z" id="Path"></path>
+        </g>
+    </g>
+</svg>

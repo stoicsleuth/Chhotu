@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  if user
+    .user-hello
+      p=`Hello ${user.name || user.email}`
+  .analysis
+    .analysis-header
+      h2=`Deep dive into ${fullUrl}`
+      h2=`Total Clicks: ${urlObj.click}`
+    .analysis-main
+      #analysis-os
+      #analysis-browser
+      #analysis-click
+  script(type='text/javascript').                                                 
+    const ua = !{JSON.stringify(urlObj.useragent)}
+    const br = !{JSON.stringify(urlObj.browser)}
+  script(type="text/javascript" src='../javascript/tuichart.min.js')
+  script(src='../javascript/analysis.js')
+  
+  
+    
+  
+          
+  

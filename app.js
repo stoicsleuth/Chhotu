@@ -13,6 +13,7 @@ const promisify = require('es6-promisify');
 const errorHandlers = require('./handlers/errorHandlers');
 const passport = require('passport');
 
+
 //require passport handler
 require('./handlers/passport');
 
@@ -23,6 +24,10 @@ const app = express();
 app.use(expressValidator());
 
 
+// app.use(forceDomain({
+//     hostname: 'www.chhotu.org'
+// }));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files
 app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work great too
@@ -30,6 +35,7 @@ app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work gr
 
 // tell Express to serve files from our public folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'bower_components')));
 
 
 //initialize Sessions
@@ -67,6 +73,23 @@ app.use((req, res, next) => {
 });
 
 //Using our routes
+
+// app.all(/.*/,  (req, res, next)=> {
+//     var host = req.header("host");
+//     if (host.match(/^www\..*/i)) {
+//       next();
+//     } else {
+//       res.redirect(301, "http://www." + host);
+//     }
+//   });
+  
+
+
+
+
+
+
+
 app.use('/', router);
 
 

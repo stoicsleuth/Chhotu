@@ -6,6 +6,8 @@ block content
     .user-hello
       p=`Hello ${user.name || user.email}`
   .url__shorten
+    //- img.rekt(src="../images/rekt.svg")
+    //- img.rekt_2(src="../images/rekt_2.svg")
     p
       | Chhotu: Make your links 
       span.sexyRed sexy.
@@ -19,11 +21,25 @@ block content
       #link
       |             
       #clipboard.fancy
+  if(!user)
+    .features-set
+      .feature
+        .img
+          img.rekt_2(src="../images/rekt_2.svg")
+        .text
+          h2 Shorten Your URL
+          p Never remember obnoxious, never ending links again. Shorten them using Chhotu and share away.
+      .feature
+        .img
+          img.rekt_3(src="../images/rekt_3.png")
+        .text
+          h2 Analyse your URL
+          p Analyse clicks, traffic and demographic of your links conveniently on our platform.
   if user
     .url-table
       .header
         span="Your"
-        span="Chotu"
+        span="Chhotu"
         span="Links"
       table.table
         tr
@@ -38,16 +54,22 @@ block content
                 a(href=`http://${url.long_url}`)=url.long_url
               td
                 a(href=`http://${url.shortUrl}`)=url.shortUrl
+                span(tooltip="Copy to clipboard")
+                  img.clip_board(src="../images/copy.svg")
               td=url.timeDiff
               if(url.click==undefined)
                 td='0 clicks'
               else 
                 td=`${url.click} clicks`
+                  span(tooltip="See Stats")
+                    a(href=`http://${url.shortUrl.split("/")[0]}/analysis/${url.shortUrl.split("/")[1]}`)
+                      img.info-svg(src="../images/info.svg")
         else
           tr
             td="No links yet! Get going."
       if count>limit
         +pagination(page,pages,count)
-    script.
-      
+  
+    
+
   

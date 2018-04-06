@@ -15,6 +15,10 @@ const {catchErrors} = require('../handlers/errorHandlers');
 
 //Declaring our routes
 
+
+
+
+
 router.get('/', catchErrors(urlController.landing));
 
 router.get('/pages/:page', catchErrors(urlController.landing));
@@ -39,35 +43,78 @@ router.get('/account', userController.editAccount);
 
 router.post('/account', catchErrors(userController.updateAccount));
 
+router.get('/analysis/:url', catchErrors(urlController.analysis));
+
 router.get('/:encoded_id', async function(req, res) {
     
     // route to redirect the visitor to their original URL given the short URL
+    console.log("here");
     if(req.params.encoded_id.indexOf('-')>1){
-        console.log('entered');
+        console.log("here");
         const url = await Darkurl.findOne({short_url:req.params.encoded_id});
-        console.log(url);
         if(url){
             
-            const longUrl = "http://" + url.long_url;
+            const longUrl = url.long_url;
+            if (!/^(f|ht)tps?:\/\//i.test(longUrl)) {
+                  longUrl = "https://" + longUrl;
+            }
+            console.log("there");
             res.redirect(longUrl);
             return;
 
         }
         else
         {
-            // req.flash('failure', 'No such url found');
+            req.flash('failure', 'No such url found');
+            console.log("nowhere");
             res.redirect('/');
             return;
         }
     }
-    var base58Id = req.params.encoded_id;
+    const base58Id = req.params.encoded_id;
     
-    var id = base58.decode(base58Id);
-    
+    const id = base58.decode(base58Id);
+    console.log(req.headers['user-agent']);
+
+    const userAgent = req.headers['user-agent'];
+    let os ='';
+    let browser = '';
+
+    //Figure out useragent of client
+    if(/mac/i.test(userAgent))
+        os = 'mac';
+    if(/win/i.test(userAgent))
+        os = 'win';
+    if(/android/i.test(userAgent))
+        os = 'android';
+    if(/iphone/i.test(userAgent))
+        os = 'iOs';
     // check if url already exists in database
+    os = "useragent."+os;
+    
+    console.log(userAgent);
+
+    //figure out browser
+    if(/safari/i.test(userAgent))
+        browser = 'safari';
+    if(/chrome/i.test(userAgent))
+        browser = 'chrome';
+    if(/firefox/i.test(userAgent))
+        browser = 'firefox';
+    if(/msie/i.test(userAgent))
+        browser = 'ie';
+    // check if url already exists in database
+    browser = "browser."+browser;
+
+
     url.findOneAndUpdate(
         {id: id},
-        {$inc : {click : 1}}, function(err, doc) {
+        {$inc : {
+            click : 1,
+            [os] : 1,
+            [browser] :1,
+        }},
+        function(err, doc) {
         if (doc) {
             // found an entry in the DB, redirect the user to their destination
             

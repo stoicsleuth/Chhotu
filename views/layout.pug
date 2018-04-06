@@ -16,6 +16,10 @@ html
     link(href='https://fonts.googleapis.com/css?family=Raleway', rel='stylesheet', type='text/css')
     |   
     link(href='./../css/style.css', rel='stylesheet', type='text/css')
+    link(href='./../css/tuichart.min.css', rel='stylesheet', type='text/css')
+    script(src='../javascript/tui-code-snippet.min.js')
+    script(src='../javascript/raphael.min.js')
+
   body
     .navbar
       ul.navbar-left
@@ -30,8 +34,11 @@ html
       |     
       if !user
         ul.navbar-right
+          li.fancyButton.fancyButton_2
+            a(href="/login") Signup
           li.fancyButton
-            a(href="/login") Login/Signup
+            a(href="/login") Login
+          
       if user
         ul.navbar-right
           li
@@ -68,5 +75,5 @@ html
         document.querySelector('.footer').style.position='fixed';
     if user
       script.
-        document.querySelector('.url_shorten').style['margin-bottom']=0px;
+        document.querySelector('.url_shorten').style['margin-bottom']="0px";
 

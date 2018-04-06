@@ -5,7 +5,7 @@ body{
     margin: 0;
     padding: 0;
     /* overflow: hidden; */
-    background: #f3f3f3;
+    background: #ffffff;
     color: black;
     font-family: 'Quicksand', sans-serif;
 }
@@ -54,6 +54,14 @@ a{
     background: linear-gradient(to right, #8E54E9, #4776E6);
 }
 
+.fancyButton_2{
+    border: 1px solid #8356e8;
+    color: #8157e9;
+    background: none;
+    box-shadow: rgba(221, 209, 255, 0.5) 0px 5px 6px;
+    margin-right: 24px;
+}
+
 .url__shorten{
     display: flex;
     flex-direction: column;
@@ -61,7 +69,7 @@ a{
     margin: 0px auto;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    height: 400px;
 }
 
 .url__shorten p{
@@ -83,6 +91,58 @@ a{
     box-shadow: rgb(183, 178, 178) 1px 13px 31px;
 }
 
+
+.rekt{
+    position: absolute;
+    left: 0px;
+    transform: rotate(-14deg);
+}
+
+.rekt_2{
+    width: 146px;
+    position: absolute;
+    left: -7px;
+    bottom: -7px;
+    transform: rotate(5deg);
+}
+.rekt_3{
+    width: 122px;
+    position: absolute;
+    left: -7px;
+    bottom: -7px;
+    transform: rotate(9deg);
+}
+
+.features-set{
+    margin: auto;
+    max-width: 1100px;
+    display: flex;
+    margin-bottom: 200px;
+    justify-content: center;
+}
+.text {
+    margin-left: 135px;
+}
+
+.text h2{
+    color: #4c4c4c;
+
+}
+
+.text p{
+    font-size: 15px;
+}
+.feature{
+    overflow: hidden;
+    max-width: 43%;
+    position: relative;
+    height: 150px;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: rgb(236, 236, 236) 1px 1px 68px;
+    background: #ffffff;
+}
+
 .user-hello{
     display: flex;
     font-size: 1.3em;
@@ -94,6 +154,22 @@ a{
     }
 }
 @media (max-width: 440px){
+    .fancyButton_2{
+        display: none;
+    }
+    .features-set{
+        flex-direction: column;
+    }
+    .feature{
+        max-width: 100%;
+        max-height: 214px;
+    }
+    .text h2{
+        font-size: 19px;
+    }
+    .text p{
+        font-size: 13px;
+    }
     .url__shorten input{
         width: 300px;
     }
@@ -258,6 +334,16 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
     color: white;
     border-radius: 40px;
 }
+
+
+
+.clip_board, .info-svg{
+    position: absolute;
+    margin-left: 10px;
+    width:20px;
+    cursor: pointer;
+}
+
 /* login */
 
 .login-form{
@@ -417,13 +503,13 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
 
 /*footer*/
 .footer{
-    position: absolute !important; 
+    position: absolute !important;
     width: 100%;
-    bottom:0;
+    bottom: 0;
     display: flex;
-    background: white;
+    background: #8356e8;
     justify-content: center;
-    color: #929396;
+    color: #ffffff;
 }
 
 .footer p:not(:last-child){
@@ -435,9 +521,9 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
         box-sizing: border-box;
         padding: 0PX 20PX;
         display: flex;
-        background: white;
+        background: #8057e8;
         justify-content: center;
-        color: #929396;
+        color: #ffffff;
         bottom: 0px;
         position: relative;
         font-size: 13px;
@@ -446,3 +532,180 @@ table.table tr th:nth-of-type(odd), table.table tr td:nth-of-type(odd){
         margin-right: 0px;
     }
 }
+
+
+@media(max-width:370px){
+    .footer p{
+        margin-right: 0px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+}
+
+
+.analysis{
+    border-radius: 5px;
+    background: white;
+    flex-direction: column;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto;
+    box-shadow: rgba(50, 50, 50, 0.2) 0px 6px 30px;
+    overflow: hidden;
+}
+
+.analysis-main{
+    display: flex;
+    margin: 50px;
+    flex-wrap: wrap;
+}
+
+.analysis-header{
+    font-weight: 200;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    background: #f857a6;
+    background: -webkit-linear-gradient(to right, #ff5858, #f857a6);
+    background: linear-gradient(to right, #ff5858, #f857a6);
+    color: white;
+}
+
+.analysis-header h2{
+    font-weight: 200;
+    font-size: 16px;
+}
+
+.analysis-header h2:last-child{
+    padding: 15px 30px;
+}
+
+/* Click cards */
+
+@media screen and (max-width:500px){
+    .analysis-header h2:first-child{
+        margin-left: 30px;
+    }
+    .analysis-header h2:last-child{
+        margin-right: 30px;
+        border-radius: 40px;
+    }
+}
+
+
+/* Tooltip styles */
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+    position: relative; /* opinion 1 */
+  }
+  
+  /* Applies to all tooltips */
+  [tooltip]::before,
+  [tooltip]::after {
+    text-transform: none; /* opinion 2 */
+    font-size: .9em; /* opinion 3 */
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+  }
+  [tooltip]::before {
+    content: '';
+    border: 5px solid transparent; /* opinion 4 */
+    z-index: 1001; /* absurdity 1 */
+  }
+  [tooltip]::after {
+    content: attr(tooltip); /* magic! */
+    
+    /* most of the rest of this is opinion */
+    text-align: center;
+    
+    /* 
+      Let the content set the size of the tooltips 
+      but this will also keep them from being obnoxious
+      */
+    min-width: 3em;
+    max-width: 21em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: .3ch;
+    box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+    background: #333;
+    color: #fff;
+    z-index: 1000; /* absurdity 2 */
+  }
+  
+  /* Make the tooltips respond to hover */
+  [tooltip]:hover::before,
+  [tooltip]:hover::after {
+    display: block;
+  }
+  
+
+  
+  /* FLOW: UP */
+  [tooltip]:not([flow])::before,
+  [tooltip][flow^="up"]::before {
+    bottom: 100%;
+    border-bottom-width: 0;
+    border-top-color: #333;
+  }
+  [tooltip]:not([flow])::after,
+  [tooltip][flow^="up"]::after {
+    bottom: calc(100% + 5px);
+  }
+  [tooltip]:not([flow])::before,
+  [tooltip]:not([flow])::after,
+  [tooltip][flow^="up"]::before,
+  [tooltip][flow^="up"]::after {
+    left: 20px;
+    transform: translate(-50%, -.5em);
+  }
+  
+
+
+  
+  /* KEYFRAMES */
+  @keyframes tooltips-vert {
+    to {
+      opacity: .9;
+      transform: translate(-50%, 0);
+    }
+  }
+  
+  @keyframes tooltips-horz {
+    to {
+      opacity: .9;
+      transform: translate(0, -50%);
+    }
+  }
+  
+  /* FX All The Things */ 
+  [tooltip]:not([flow]):hover::before,
+  [tooltip]:not([flow]):hover::after,
+  [tooltip][flow^="up"]:hover::before,
+  [tooltip][flow^="up"]:hover::after
+  {
+    animation: tooltips-vert 300ms ease-out forwards;
+  }
+  
+  [tooltip][flow^="left"]:hover::before,
+  [tooltip][flow^="left"]:hover::after,
+  [tooltip][flow^="right"]:hover::before,
+  [tooltip][flow^="right"]:hover::after {
+    animation: tooltips-horz 300ms ease-out forwards;
+  }
+  
+  
+  
+  
+  
+  

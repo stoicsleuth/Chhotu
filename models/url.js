@@ -18,7 +18,19 @@ var urlSchema = new Schema({
         type: mongoose.Schema.ObjectId,
         ref :'users'
   },
-  click: 0
+  click: 0,
+  useragent : {
+      windows: { type: Number, default: 0 },
+      mac : { type: Number, default: 0 },
+      android:{ type: Number, default: 0 },
+      iOs: { type: Number, default: 0 }
+  },
+  browser : {
+    chrome: { type: Number, default: 0 },
+    safari : { type: Number, default: 0 },
+    firefox:{ type: Number, default: 0 },
+    ie: { type: Number, default: 0 }
+  }
 });
 
 urlSchema.pre('save', function(next){

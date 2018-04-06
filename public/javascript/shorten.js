@@ -67,7 +67,6 @@ if(document.querySelector('.button-shorten')!=null){
 }
 
 document.getElementById('clipboard').addEventListener('click', ()=>{
-      console.log("Working");
       copyToClipboard(document.querySelector('.result').innerText);
   })
 
@@ -93,6 +92,13 @@ document.getElementById('clipboard').addEventListener('click', ()=>{
     }
 }
 
+document.querySelector('.table').
+    addEventListener('click', (e)=>{
+    if(e.target.classList.contains('clip_board')){
+        copyToClipboard(e.target.parentNode.parentNode.innerText);
+    }
+   
+})
 
 
 

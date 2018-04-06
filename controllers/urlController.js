@@ -19,8 +19,8 @@ exports.shorten = async (req, res) => {
     // check if url already exists in database
     const doc = await url.findOne({
         long_url: longUrl
-    });
-    if (doc) {
+    }).populate('user');
+    if (doc && doc.user == req.user) {
             
             // base58 encode the unique _id of that document and construct the short URL
             shortUrl = req.headers.host + '/' + base58.encode(doc.id);
@@ -163,6 +163,18 @@ exports.shortenDark = async (req, res) => {
     res.send({
         'shortUrl': req.headers.host + '/' + shortUrl
     });
+
+
+};
+
+
+
+exports.analysis = async (req,res)=>{
+    const fullUrl = req.headers.host + '/' + req.params.url;
+    const base58Id = req.params.url;
+    const id = base58.decode(base58Id);
+    const urlObj = await url.findOne({id:id});
+    res.render('analysis', {urlObj, fullUrl});
 
 
 };
